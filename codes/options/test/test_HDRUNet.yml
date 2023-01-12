@@ -2,13 +2,21 @@ name: HDRUNet_tanh_l1_bs_16_ps_160
 model: condition
 distortion: sr
 scale: 1
-gpu_ids: [0]
+dist:
+train:
+is_train: false
+gpu_ids: #[0]
+
 
 datasets:
   test_1:  # the 1st test dataset
-    name: 000_Valid_SingleFrame_FirstStage
+    name: 000_Valid_SingleFrame_FirstStage_long
     mode: LQ_condition
-    dataroot_LQ: /data0/NTIRE2021_HDR/000_Valid_SingleFrame_FirstStage/medium
+    phase: test
+    data_type: img
+#    dataroot_LQ: /data0/NTIRE2021_HDR/000_Valid_SingleFrame_FirstStage_medium/medium
+    dataroot_GT:
+    dataroot_LQ: /Users/echoiing/stereo-camera-simulator/stereo/models/hdr-reconstruction/HDRUNet/codes/dataset/NTIRE21_HDR_valid_input/long
     condition: image
     
 #### network structures
@@ -22,5 +30,10 @@ network_G:
 #### path
 path:
   root: ./
+  strict_load: false
   # pretrain_model_G: ../experiments/HDRUNet_tanh_l1_bs_16_ps_160/models/latest_G.pth
-  pretrain_model_G: ../pretrained_models/pretrained_model.pth
+#  pretrain_model_G: ../pretrained_models/pretrained_model.pth
+  pretrain_model_G: /Users/echoiing/stereo-camera-simulator/stereo/models/hdr-reconstruction/HDRUNet/pretrained_models/pretrained_model.pth
+  experiments_root: ./
+  results_root: ./
+  log: /Users/echoiing/stereo-camera-simulator/stereo/models/hdr-reconstruction/HDRUNet/log
