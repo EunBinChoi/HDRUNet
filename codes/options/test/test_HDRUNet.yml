@@ -16,7 +16,7 @@ datasets:
     data_type: img
 #    dataroot_LQ: /data0/NTIRE2021_HDR/000_Valid_SingleFrame_FirstStage_medium/medium
     dataroot_GT:
-    dataroot_LQ: /Users/echoiing/stereo-camera-simulator/stereo/models/hdr-reconstruction/HDRUNet/codes/dataset/NTIRE21_HDR_valid_input/long
+    dataroot_LQ: /Users/echoiing/stereo-camera-simulator/stereo/ref-models/hdr-reconstruction/HDRUNet/codes/dataset/NTIRE21_HDR_valid_input/long
     condition: image
     
 #### network structures
@@ -31,9 +31,9 @@ network_G:
 path:
   root: ./
   strict_load: false
-  # pretrain_model_G: ../experiments/HDRUNet_tanh_l1_bs_16_ps_160/models/latest_G.pth
+  # pretrain_model_G: ../experiments/HDRUNet_tanh_l1_bs_16_ps_160/ref-models/latest_G.pth
 #  pretrain_model_G: ../pretrained_models/pretrained_model.pth
-  pretrain_model_G: /Users/echoiing/stereo-camera-simulator/stereo/models/hdr-reconstruction/HDRUNet/pretrained_models/pretrained_model.pth
+  pretrain_model_G: /Users/echoiing/stereo-camera-simulator/stereo/ref-models/hdr-reconstruction/HDRUNet/pretrained_models/pretrained_model.pth
   experiments_root: ./
   results_root: ./
-  log: /Users/echoiing/stereo-camera-simulator/stereo/models/hdr-reconstruction/HDRUNet/log
+  log: /Users/echoiing/stereo-camera-simulator/stereo/ref-models/hdr-reconstruction/HDRUNet/log

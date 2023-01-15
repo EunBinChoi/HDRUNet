@@ -226,10 +226,10 @@ def main():
                     tb_logger.add_scalar('mu_PSNR', avg_tonemapped_psnr, current_step)
                 
 
-            #### save models and training states
+            #### save ref-models and training states
             if current_step % opt['logger']['save_checkpoint_freq'] == 0:
                 if rank <= 0:
-                    logger.info('Saving models and training states.')
+                    logger.info('Saving ref-models and training states.')
                     model.save(current_step)
                     model.save_training_state(epoch, current_step)
 

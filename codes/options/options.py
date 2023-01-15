@@ -1,7 +1,21 @@
 import os
+import sys
 import os.path as osp
 import logging
 import yaml
+
+# getting the name of the directory
+# where this file is present.
+current = os.path.dirname(os.path.realpath(__file__))
+
+# Getting the parent directory name
+# where the current directory is present.
+parent = os.path.dirname(current)
+
+# adding the parent directory to
+# the sys.path.
+sys.path.insert(0, parent)
+
 from utils.util import OrderedYaml
 Loader, Dumper = OrderedYaml()
 
@@ -10,9 +24,9 @@ def parse(opt_path, is_train=True):
     with open(opt_path, mode='r') as f:
         opt = yaml.load(f, Loader=Loader)
     # export CUDA_VISIBLE_DEVICES
-    gpu_list = ','.join(str(x) for x in opt['gpu_ids'])
-    os.environ['CUDA_VISIBLE_DEVICES'] = gpu_list
-    print('export CUDA_VISIBLE_DEVICES=' + gpu_list)
+    # gpu_list = ','.join(str(x) for x in opt['gpu_ids'])
+    # os.environ['CUDA_VISIBLE_DEVICES'] = gpu_list
+    # print('export CUDA_VISIBLE_DEVICES=' + gpu_list)
 
     opt['is_train'] = is_train
     if opt['distortion'] == 'sr':
@@ -50,7 +64,7 @@ def parse(opt_path, is_train=True):
     if is_train:
         experiments_root = osp.join(opt['path']['root'], 'experiments', opt['name'])
         opt['path']['experiments_root'] = experiments_root
-        opt['path']['models'] = osp.join(experiments_root, 'models')
+        opt['path']['ref-models'] = osp.join(experiments_root, 'ref-models')
         opt['path']['training_state'] = osp.join(experiments_root, 'training_state')
         opt['path']['log'] = experiments_root
         opt['path']['val_images'] = osp.join(experiments_root, 'val_images')
@@ -111,10 +125,10 @@ def check_resume(opt, resume_iter):
                 'pretrain_model_D', None) is not None:
             logger.warning('pretrain_model path will be ignored when resuming training.')
 
-        opt['path']['pretrain_model_G'] = osp.join(opt['path']['models'],
+        opt['path']['pretrain_model_G'] = osp.join(opt['path']['ref-models'],
                                                    '{}_G.pth'.format(resume_iter))
         logger.info('Set [pretrain_model_G] to ' + opt['path']['pretrain_model_G'])
         if 'gan' in opt['model']:
-            opt['path']['pretrain_model_D'] = osp.join(opt['path']['models'],
+            opt['path']['pretrain_model_D'] = osp.join(opt['path']['ref-models'],
                                                        '{}_D.pth'.format(resume_iter))
             logger.info('Set [pretrain_model_D] to ' + opt['path']['pretrain_model_D'])

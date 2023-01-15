@@ -21,7 +21,7 @@ class GenerationModel(BaseModel):
             self.rank = -1  # non dist training
         train_opt = opt['train']
 
-        # define network and load pretrained models
+        # define network and load pretrained ref-models
         self.netG = networks.define_G(opt).to(self.device)
         if opt['dist']:
             self.netG = DistributedDataParallel(self.netG, device_ids=[torch.cuda.current_device()])
@@ -83,6 +83,7 @@ class GenerationModel(BaseModel):
             self.log_dict = OrderedDict()
 
     def feed_data(self, data, need_GT=True):
+        print('LQ =>', data['LQ'], 'cond =>', data['cond'])
         self.var_L = data['LQ'].to(self.device)  # LQ
         self.var_cond = data['cond'].to(self.device) # cond
         

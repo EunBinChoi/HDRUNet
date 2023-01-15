@@ -14,7 +14,6 @@ class LQ_Dataset(data.Dataset):
         self.LQ_env = None  # environment for lmdb
 
         # read image list from lmdb or image files
-        print(opt['data_type'],opt['dataroot_LQ'])
         self.LQ_env, self.paths_LQ = util.get_image_paths(opt['data_type'], opt['dataroot_LQ'])
         assert self.paths_LQ, 'Error: LQ paths are empty.'
 
