@@ -9,8 +9,6 @@ import utils.util as util
 from data import create_dataset, create_dataloader
 from models import create_model
 
-import numpy as np
-
 #### options
 parser = argparse.ArgumentParser()
 parser.add_argument('-opt', type=str, required=True, help='Path to options YMAL file.')

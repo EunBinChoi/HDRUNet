@@ -21,7 +21,7 @@ class GenerationModel(BaseModel):
             self.rank = -1  # non dist training
         train_opt = opt['train']
 
-        # define network and load pretrained models
+        # define network and load pretrained reference
         self.netG = networks.define_G(opt).to(self.device)
         if opt['dist']:
             self.netG = DistributedDataParallel(self.netG, device_ids=[torch.cuda.current_device()])
