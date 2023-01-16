@@ -4,16 +4,19 @@ model: condition
 use_tb_logger: true
 distortion: sr
 scale: 1
-gpu_ids: #[0]
+mps_ids: [0]
 
 #### datasets
 datasets:
   train:
     name: Single_LDR2HDR
     mode: LQGT_condition
-    dataroot_LQ: /data0/NTIRE2021_HDR/000_Train_SingleFrame_FirstStage/medium_sub
-    dataroot_GT: /data0/NTIRE2021_HDR/000_Train_SingleFrame_FirstStage/gt_sub
-    dataroot_ratio: /data0/NTIRE2021_HDR/000_Train_SingleFrame_FirstStage/alignratio
+    dataroot_LQ: /Users/echoiing/stereo-camera-end2end/stereo/models/hdr-reconstruction/HDRUNet/codes/dataset/NTIRE21_HDR_train_input/medium_sub
+    dataroot_GT: /Users/echoiing/stereo-camera-end2end/stereo/models/hdr-reconstruction/HDRUNet/codes/dataset/NTIRE21_HDR_train_input/gt_sub
+    dataroot_ratio: /Users/echoiing/stereo-camera-end2end/stereo/models/hdr-reconstruction/HDRUNet/codes/dataset/NTIRE21_HDR_train_input/alignratio
+#    dataroot_LQ: /data0/NTIRE2021_HDR/000_Train_SingleFrame_FirstStage/medium_sub
+#    dataroot_GT: /data0/NTIRE2021_HDR/000_Train_SingleFrame_FirstStage/gt_sub
+#    dataroot_ratio: /data0/NTIRE2021_HDR/000_Train_SingleFrame_FirstStage/alignratio
     use_shuffle: true
 #    n_workers: 8
     n_workers: 0
@@ -25,9 +28,12 @@ datasets:
   val:
     name: Single_LDR2HDR
     mode: LQGT_condition
-    dataroot_LQ: /data0/NTIRE2021_HDR/000_Valid_SingleFrame_FirstStage_medium/medium
-    dataroot_GT: /data0/NTIRE2021_HDR/000_Valid_SingleFrame_FirstStage_medium/gt
-    dataroot_ratio: /data0/NTIRE2021_HDR/000_Valid_SingleFrame_FirstStage_medium/alignratio
+    dataroot_LQ: /Users/echoiing/stereo-camera-simulator/stereo/models/hdr-reconstruction/HDRUNet/codes/dataset/NTIRE21_HDR_valid_input/medium_sub
+    dataroot_GT: /Users/echoiing/stereo-camera-simulator/stereo/models/hdr-reconstruction/HDRUNet/codes/dataset/NTIRE21_HDR_valid_input/gt_sub
+    dataroot_ratio: /Users/echoiing/stereo-camera-simulator/stereo/models/hdr-reconstruction/HDRUNet/codes/dataset/NTIRE21_HDR_valid_input/alignratio
+#    dataroot_LQ: /data0/NTIRE2021_HDR/000_Valid_SingleFrame_FirstStage_medium/medium
+#    dataroot_GT: /data0/NTIRE2021_HDR/000_Valid_SingleFrame_FirstStage_medium/gt
+#    dataroot_ratio: /data0/NTIRE2021_HDR/000_Valid_SingleFrame_FirstStage_medium/alignratio
     condition: image
 
 #### network structures
@@ -51,7 +57,7 @@ train:
 #  lr_scheme: MultiStepLR # MultiStepLR | CosineAnnealingLR_Restart
   beta1: 0.9
   beta2: 0.99
-  niter: 1000000 # 600000 
+  niter: 10 # 1000000 # 600000
   warmup_iter: -1  # no warm up
 
   lr_scheme: MultiStepLR
